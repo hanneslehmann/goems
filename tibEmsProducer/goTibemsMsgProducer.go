@@ -2,7 +2,8 @@ package main
 
 /*
 #cgo CFLAGS: -I../../include
-#cgo LDFLAGS: -L../../lib/64 -L../../lib -ltibems64 -ltibemslookup64 -ltibemsufo64 -ltibemsadmin64 -lldap -llber -lxml2 -lssl -lcrypto -lz -lpthread -ldl
+#cgo LDFLAGS: -L/path/ems/8.2/lib/64 -L/path/ems/8.2/lib  -m64
+#cgo LDFLAGS: -ltibems64 -ltibemslookup64 -ltibemsufo64 -ltibemsadmin64 -lldap -llber -lxml2 -lssl -lcrypto -lz -lpthread -ldl
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,15 +22,15 @@ var serverUrl    	*C.char
 var userName     	*C.char
 var password     	*C.char
 var pk_password  	*C.char
-var name            *C.char
-var factory         C.tibemsConnectionFactory
-var connection      C.tibemsConnection
-var session         C.tibemsSession
-var msgProducer     C.tibemsMsgProducer
-var destination     C.tibemsDestination
-var queue           C.tibemsQueue
-var sslParams       C.tibemsSSLParams
-var errorContext    C.tibemsErrorContext
+var name 					*C.char
+var factory 			C.tibemsConnectionFactory
+var connection		C.tibemsConnection
+var session				C.tibemsSession
+var msgProducer		C.tibemsMsgProducer
+var destination		C.tibemsDestination
+var queue		      C.tibemsQueue
+var sslParams			C.tibemsSSLParams
+var errorContext	C.tibemsErrorContext
 
 
 func onCompletion(msg C.tibemsMsg,  status C.tibems_status) {
@@ -119,5 +120,4 @@ func main() {
  if (status != C.TIBEMS_OK){
      fail("Error publishing tibemsTextMsg", errorContext);
  }
-
 }
