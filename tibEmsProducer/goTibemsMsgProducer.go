@@ -14,7 +14,6 @@ import "os"
 
 
 /*-----------------------------------------------------------------------
-#cgo LDFLAGS: -l/home/hannes/Tibco/tibco_home/ems/8.2/lib/64/libtibems64.so --verbose
  * Parameters
  *----------------------------------------------------------------------*/
 
@@ -72,7 +71,6 @@ func main() {
  password=C.CString("admin")
  var status C.tibems_status
  var msg C.tibemsTextMsg
- var i  C.tibems_int
  status=  C.TIBEMS_OK
  fmt.Printf("Publishing to destination '%s'\n",name);
  status = C.tibemsErrorContext_Create(&errorContext);
@@ -122,6 +120,4 @@ func main() {
      fail("Error publishing tibemsTextMsg", errorContext);
  }
 
-
- _ = i
 }
