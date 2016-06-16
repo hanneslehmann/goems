@@ -22,15 +22,15 @@ var serverUrl    	*C.char
 var userName     	*C.char
 var password     	*C.char
 var pk_password  	*C.char
-var name 					*C.char
-var factory 			C.tibemsConnectionFactory
+var name            *C.char
+var factory         C.tibemsConnectionFactory
 var connection		C.tibemsConnection
-var session				C.tibemsSession
+var session         C.tibemsSession
 var msgProducer		C.tibemsMsgProducer
 var destination		C.tibemsDestination
-var queue		      C.tibemsQueue
-var sslParams			C.tibemsSSLParams
-var errorContext	C.tibemsErrorContext
+var queue           C.tibemsQueue
+var sslParams       C.tibemsSSLParams
+var errorContext    C.tibemsErrorContext
 
 
 func onCompletion(msg C.tibemsMsg,  status C.tibems_status) {
