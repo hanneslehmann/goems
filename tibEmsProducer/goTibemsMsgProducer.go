@@ -2,7 +2,7 @@ package main
 
 /*
 #cgo CFLAGS: -I../../include
-#cgo LDFLAGS: -L/path/ems/8.2/lib/64 -L/path/ems/8.2/lib  -m64
+#cgo LDFLAGS: -L/home/hannes/Tibco/tibco_home/ems/8.2/lib/64 -L/home/hannes/Tibco/tibco_home/ems/8.2/lib  -m64
 #cgo LDFLAGS: -ltibems64 -ltibemslookup64 -ltibemsufo64 -ltibemsadmin64 -lldap -llber -lxml2 -lssl -lcrypto -lz -lpthread -ldl
 #include <stdlib.h>
 #include <stdio.h>
@@ -22,15 +22,15 @@ var serverUrl    	*C.char
 var userName     	*C.char
 var password     	*C.char
 var pk_password  	*C.char
-var name            *C.char
-var factory         C.tibemsConnectionFactory
+var name 					*C.char
+var factory 			C.tibemsConnectionFactory
 var connection		C.tibemsConnection
-var session         C.tibemsSession
+var session				C.tibemsSession
 var msgProducer		C.tibemsMsgProducer
 var destination		C.tibemsDestination
-var queue           C.tibemsQueue
-var sslParams       C.tibemsSSLParams
-var errorContext    C.tibemsErrorContext
+var queue		      C.tibemsQueue
+var sslParams			C.tibemsSSLParams
+var errorContext	C.tibemsErrorContext
 
 
 func onCompletion(msg C.tibemsMsg,  status C.tibems_status) {
@@ -119,5 +119,18 @@ func main() {
  status = C.tibemsMsgProducer_Send(msgProducer,msg);
  if (status != C.TIBEMS_OK){
      fail("Error publishing tibemsTextMsg", errorContext);
+ }
+ status = C.tibemsMsg_Destroy(msg);
+ if (status != C.TIBEMS_OK) {
+     fail("Error destroying tibemsTextMsg", errorContext);
+ }
+ status = C.tibemsDestination_Destroy(destination);
+ if (status != C.TIBEMS_OK){
+     fail("Error destroying tibemsDestination", errorContext);
+ }
+ /* close the connection */
+ status = C.tibemsConnection_Close(connection);
+ if (status != C.TIBEMS_OK){
+     fail("Error closing tibemsConnection", errorContext);
  }
 }
